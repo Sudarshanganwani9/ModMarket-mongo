@@ -69,7 +69,7 @@ cd ModMarket-mongo-main
 2. Install dependencies
 
 npm install
-# or
+ ### or
 bun install
 
 
