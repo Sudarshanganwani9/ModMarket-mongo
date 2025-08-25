@@ -2,8 +2,10 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
-import { Search, ShoppingCart, User, Menu, Package, Code } from "lucide-react";
+import { Search, ShoppingCart, User, Menu, Package, Code, LogOut } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { useAuth } from "@/contexts/auth-context";
+import { Link } from "react-router-dom";
 
 interface NavigationProps {
   className?: string;
@@ -11,13 +13,14 @@ interface NavigationProps {
 
 export function Navigation({ className }: NavigationProps) {
   const [searchQuery, setSearchQuery] = useState("");
+  const { user, signOut } = useAuth();
 
   return (
     <header className={cn("border-b border-border bg-background/80 backdrop-blur-md sticky top-0 z-50", className)}>
       <div className="container mx-auto px-4 py-4">
         <div className="flex items-center justify-between gap-4">
           {/* Logo */}
-          <div className="flex items-center gap-2">
+          <Link to="/" className="flex items-center gap-2">
             <div className="p-2 rounded-lg bg-gradient-to-br from-primary to-primary-glow">
               <Package className="h-6 w-6 text-primary-foreground" />
             </div>
@@ -25,7 +28,7 @@ export function Navigation({ className }: NavigationProps) {
               <h1 className="text-xl font-bold text-foreground">ModMarket</h1>
               <p className="text-xs text-muted-foreground">Projects & APKs</p>
             </div>
-          </div>
+          </Link>
 
           {/* Search Bar */}
           <div className="flex-1 max-w-2xl relative">
@@ -60,12 +63,28 @@ export function Navigation({ className }: NavigationProps) {
                 2
               </Badge>
             </Button>
-            <Button variant="ghost" size="icon">
-              <User className="h-5 w-5" />
-            </Button>
-            <Button size="sm" className="bg-gradient-to-r from-primary to-primary-glow hover:opacity-90 transition-opacity">
-              Sign In
-            </Button>
+            
+            {user ? (
+              <>
+                <Button variant="ghost" size="icon">
+                  <User className="h-5 w-5" />
+                </Button>
+                <Button 
+                  variant="ghost" 
+                  size="icon"
+                  onClick={signOut}
+                  className="text-muted-foreground hover:text-foreground"
+                >
+                  <LogOut className="h-5 w-5" />
+                </Button>
+              </>
+            ) : (
+              <Link to="/auth">
+                <Button size="sm" className="bg-gradient-to-r from-primary to-primary-glow hover:opacity-90 transition-opacity">
+                  Sign In
+                </Button>
+              </Link>
+            )}
           </div>
 
           {/* Mobile Menu */}
