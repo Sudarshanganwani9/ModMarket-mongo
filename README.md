@@ -61,7 +61,8 @@ ModMarket-mongo-main/
 
 1. Clone the repository
 
-git clone https://github.com/yourusername/ModMarket-mongo.git
+git clonehttps://github.com/Sudarshanganwani9/ModMarket-mongo
+
 cd ModMarket-mongo-main
 
 
