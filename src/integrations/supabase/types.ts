@@ -70,6 +70,60 @@ export type Database = {
         }
         Relationships: []
       }
+      downloads: {
+        Row: {
+          download_type: string | null
+          downloaded_at: string
+          id: string
+          product_id: string
+          user_id: string
+        }
+        Insert: {
+          download_type?: string | null
+          downloaded_at?: string
+          id?: string
+          product_id: string
+          user_id: string
+        }
+        Update: {
+          download_type?: string | null
+          downloaded_at?: string
+          id?: string
+          product_id?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      licenses: {
+        Row: {
+          allows_commercial_use: boolean | null
+          allows_modification: boolean | null
+          created_at: string
+          description: string | null
+          id: string
+          name: string
+          requires_attribution: boolean | null
+        }
+        Insert: {
+          allows_commercial_use?: boolean | null
+          allows_modification?: boolean | null
+          created_at?: string
+          description?: string | null
+          id?: string
+          name: string
+          requires_attribution?: boolean | null
+        }
+        Update: {
+          allows_commercial_use?: boolean | null
+          allows_modification?: boolean | null
+          created_at?: string
+          description?: string | null
+          id?: string
+          name?: string
+          requires_attribution?: boolean | null
+        }
+        Relationships: []
+      }
       order_items: {
         Row: {
           created_at: string
@@ -154,11 +208,15 @@ export type Database = {
           id: string
           images: string[] | null
           is_active: boolean
+          is_premium: boolean | null
+          license_type: string | null
           name: string
           price: number
           seller_id: string
           stock_quantity: number
+          tags: string[] | null
           updated_at: string
+          view_count: number | null
         }
         Insert: {
           category_id?: string | null
@@ -168,11 +226,15 @@ export type Database = {
           id?: string
           images?: string[] | null
           is_active?: boolean
+          is_premium?: boolean | null
+          license_type?: string | null
           name: string
           price: number
           seller_id: string
           stock_quantity?: number
+          tags?: string[] | null
           updated_at?: string
+          view_count?: number | null
         }
         Update: {
           category_id?: string | null
@@ -182,11 +244,15 @@ export type Database = {
           id?: string
           images?: string[] | null
           is_active?: boolean
+          is_premium?: boolean | null
+          license_type?: string | null
           name?: string
           price?: number
           seller_id?: string
           stock_quantity?: number
+          tags?: string[] | null
           updated_at?: string
+          view_count?: number | null
         }
         Relationships: [
           {
@@ -274,6 +340,27 @@ export type Database = {
             referencedColumns: ["id"]
           },
         ]
+      }
+      wishlists: {
+        Row: {
+          created_at: string
+          id: string
+          product_id: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          product_id: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          product_id?: string
+          user_id?: string
+        }
+        Relationships: []
       }
     }
     Views: {
